@@ -1,110 +1,142 @@
 export default {
   async fetch(request) {
-
     const html = `<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UKOBACK — Poeta · Youtuber</title>
-<meta name="description" content="Ukoback — Youtuber chileno, poeta y creador de contenido. Espacio digital oficial.">
+<title>Elders Papus — Canal Colaborativo</title>
+<meta name="description" content="Elders Papus — Canal colaborativo formado por RenMati, Ukoback y Keeper. Contenido gaming y mucho más.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
-/* ── RESET ─────────────────────────────────────────── */
-*, *::before, *::after {
-  margin: 0; padding: 0;
-  box-sizing: border-box;
-}
-
-/* ── VARIABLES ──────────────────────────────────────── */
-:root {
-  --ink: #0a0806;
-  --paper: #f5f0e8;
-  --cream: #ede6d6;
-  --gold: #c9a84c;
-  --gold-dim: #7a6228;
-  --rust: #8b3a2a;
-  --white: #faf7f2;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body: 'Crimson Pro', serif;
-  --font-mono: 'Space Mono', monospace;
-}
-
-/* ── BASE ───────────────────────────────────────────── */
+/* ── RESET ──────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 
+/* ── VARIABLES ──────────────────────────── */
+:root {
+  /* From banner: deep teal-navy, electric cyan, warm orange-gold, dark charcoal */
+  --bg:        #080c10;
+  --bg2:       #0b1118;
+  --surface:   #0e1620;
+  --surface2:  #121e2c;
+  --cyan:      #00c8e0;
+  --cyan-dim:  #0088a0;
+  --cyan-glow: rgba(0,200,224,0.18);
+  --orange:    #e07820;
+  --orange-dim:#a05010;
+  --orange-glow: rgba(224,120,32,0.18);
+  --white:     #e8f4f8;
+  --muted:     rgba(232,244,248,0.45);
+  --border:    rgba(0,200,224,0.12);
+  --border2:   rgba(0,200,224,0.25);
+  --font-display: 'Orbitron', monospace;
+  --font-body:    'Rajdhani', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+}
+
 body {
-  background: var(--ink);
+  background: var(--bg);
   color: var(--white);
   font-family: var(--font-body);
   overflow-x: hidden;
   cursor: none;
 }
 
-/* ── CURSOR CUSTOM ──────────────────────────────────── */
+/* ── CUSTOM CURSOR ──────────────────────── */
 .cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 10px; height: 10px;
-  background: var(--gold);
+  position: fixed; top:0; left:0;
+  width: 8px; height: 8px;
+  background: var(--cyan);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s ease, width 0.2s, height 0.2s, background 0.2s;
-  mix-blend-mode: difference;
+  transform: translate(-50%,-50%);
+  transition: width .15s, height .15s, background .2s;
+  mix-blend-mode: screen;
 }
-
 .cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(201,168,76,0.5);
+  position: fixed; top:0; left:0;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(0,200,224,0.5);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.18s ease;
+  transform: translate(-50%,-50%);
+  transition: transform .18s ease;
 }
 
-body:hover .cursor { opacity: 1; }
-
-/* ── NOISE OVERLAY ──────────────────────────────────── */
+/* ── SCANLINE OVERLAY ───────────────────── */
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.03;
+  content:'';
+  position: fixed; inset:0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
   pointer-events: none;
-  z-index: 100;
+  z-index: 90;
 }
 
-/* ── NAV ────────────────────────────────────────────── */
+/* ── GRID BACKGROUND PATTERN ────────────── */
+body::after {
+  content:'';
+  position: fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(0,200,224,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,224,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ────────────────────────────────── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: fixed; top:0; left:0; right:0;
   z-index: 500;
-  padding: 24px 40px;
+  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(10,8,6,0.9), transparent);
+  background: linear-gradient(to bottom, rgba(8,12,16,0.95), transparent);
+  backdrop-filter: blur(0px);
+  transition: background .4s, backdrop-filter .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+
+nav.scrolled {
+  background: rgba(8,12,16,0.97);
+  backdrop-filter: blur(12px);
+  border-color: var(--border);
 }
 
 .nav-logo {
   font-family: var(--font-display);
-  font-size: 22px;
-  letter-spacing: 6px;
-  color: var(--gold);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--cyan);
   text-decoration: none;
+  text-shadow: 0 0 20px var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo img {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--cyan-dim);
 }
 
 .nav-links {
   display: flex;
-  gap: 36px;
+  gap: 32px;
   list-style: none;
 }
 
@@ -112,308 +144,567 @@ nav {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 3px;
-  color: rgba(250,247,242,0.5);
+  color: var(--muted);
   text-decoration: none;
   text-transform: uppercase;
-  transition: color 0.3s;
+  transition: color .25s, text-shadow .25s;
 }
 
-.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan);
+}
 
-/* ── HERO ───────────────────────────────────────────── */
+/* ── HERO ───────────────────────────────── */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   overflow: hidden;
+  padding-bottom: 80px;
 }
 
-/* video background */
-.hero-video-wrap {
+.hero-banner {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hero-video-wrap iframe {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 177.78vh;
-  min-width: 100%;
-  height: 100vh;
-  min-height: 56.25vw;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  border: none;
-}
-
-/* overlays */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    160deg,
-    rgba(10,8,6,0.85) 0%,
-    rgba(10,8,6,0.65) 50%,
-    rgba(10,8,6,0.9) 100%
-  );
   z-index: 1;
 }
 
-.hero-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 30%, rgba(10,8,6,0.7) 100%);
+.hero-banner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8,12,16,0.3) 0%,
+    rgba(8,12,16,0.5) 40%,
+    rgba(8,12,16,0.92) 80%,
+    var(--bg) 100%
+  );
   z-index: 2;
 }
 
-/* content */
+.hero-side-fade-l {
+  position: absolute; top:0; left:0; bottom:0;
+  width: 200px;
+  background: linear-gradient(to right, var(--bg), transparent);
+  z-index: 3;
+}
+.hero-side-fade-r {
+  position: absolute; top:0; right:0; bottom:0;
+  width: 200px;
+  background: linear-gradient(to left, var(--bg), transparent);
+  z-index: 3;
+}
+
 .hero-content {
   position: relative;
   z-index: 10;
   text-align: center;
-  padding: 20px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hero-eyebrow {
+.hero-logo-ring {
+  width: clamp(100px, 18vw, 150px);
+  height: clamp(100px, 18vw, 150px);
+  position: relative;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-logo-ring::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--cyan-dim);
+  box-shadow: 0 0 30px var(--cyan-glow), inset 0 0 30px var(--cyan-glow);
+  animation: pulse-ring 3s infinite;
+}
+
+.hero-logo-ring::after {
+  content: '';
+  position: absolute; inset: -14px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0,200,224,0.2);
+  animation: spin 12s linear infinite;
+}
+
+.hero-logo-ring img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--cyan-dim);
+  display: block;
+}
+
+.hero-badge {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 6px;
-  color: var(--gold);
+  color: var(--cyan);
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   opacity: 0;
-  animation: fadeUp 1s 0.3s forwards;
+  animation: fadeUp 0.8s 0.5s forwards;
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(80px, 18vw, 200px);
-  line-height: 0.9;
-  letter-spacing: 8px;
+  font-size: clamp(52px, 12vw, 130px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 6px;
   color: var(--white);
-  text-shadow: 0 0 80px rgba(201,168,76,0.15);
+  text-shadow:
+    0 0 40px rgba(0,200,224,0.25),
+    0 0 80px rgba(0,200,224,0.1);
   opacity: 0;
-  animation: fadeUp 1s 0.6s forwards;
+  animation: fadeUp 0.8s 0.7s forwards;
 }
 
-.hero-title span {
-  color: var(--gold);
-}
+.hero-title .accent { color: var(--cyan); }
 
 .hero-sub {
   font-family: var(--font-body);
-  font-style: italic;
-  font-size: clamp(16px, 2.5vw, 24px);
-  color: rgba(250,247,242,0.65);
-  margin-top: 16px;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 3px;
+  margin-top: 14px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.9s forwards;
+}
+
+.hero-members-tag {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.1s forwards;
+}
+
+.member-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
   letter-spacing: 2px;
+  padding: 6px 14px;
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  background: rgba(0,200,224,0.05);
+}
+
+.member-tag-sep {
+  color: rgba(0,200,224,0.3);
+  font-size: 18px;
+}
+
+.hero-cta {
+  margin-top: 36px;
   opacity: 0;
-  animation: fadeUp 1s 0.9s forwards;
+  animation: fadeUp 0.8s 1.3s forwards;
 }
 
-/* profile */
-.hero-profile {
-  margin-top: 40px;
-  opacity: 0;
-  animation: fadeUp 1s 1.2s forwards;
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: transparent;
+  border: 1px solid var(--cyan);
+  border-radius: 2px;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: color .3s, box-shadow .3s;
+  box-shadow: 0 0 20px rgba(0,200,224,0.1);
 }
 
-.hero-profile img {
-  width: clamp(90px, 15vw, 140px);
-  height: clamp(90px, 15vw, 140px);
-  border-radius: 50%;
-  border: 2px solid var(--gold-dim);
-  object-fit: cover;
-  box-shadow: 0 0 0 8px rgba(201,168,76,0.05), 0 20px 60px rgba(0,0,0,0.8);
-  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.5s;
+.btn-primary::before {
+  content: '';
+  position: absolute; left:0; top:0; bottom:0;
+  width: 0;
+  background: var(--cyan);
+  transition: width .35s cubic-bezier(0.25,0.46,0.45,0.94);
+  z-index: 0;
 }
 
-.hero-profile img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 0 12px rgba(201,168,76,0.1), 0 30px 80px rgba(0,0,0,0.9);
+.btn-primary:hover::before { width: 100%; }
+.btn-primary:hover {
+  color: var(--bg);
+  box-shadow: 0 0 40px rgba(0,200,224,0.4);
 }
+
+.btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
 
 /* scroll hint */
 .scroll-hint {
-  position: absolute;
-  bottom: 36px;
-  left: 50%;
+  position: absolute; bottom: 30px; left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
   opacity: 0;
   animation: fadeIn 1s 2s forwards;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
 }
 
 .scroll-hint span {
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 3px;
-  color: rgba(250,247,242,0.3);
+  color: rgba(0,200,224,0.4);
   text-transform: uppercase;
 }
 
 .scroll-line {
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--cyan-dim), transparent);
   animation: scrollPulse 2s 2s infinite;
 }
 
-/* ── BANNER ─────────────────────────────────────────── */
-.banner-wrap {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  height: clamp(120px, 25vw, 320px);
-}
-
-.banner-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
-  filter: brightness(0.7) contrast(1.1);
-}
-
-.banner-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(10,8,6,0.6) 0%, transparent 50%, rgba(10,8,6,0.6) 100%);
-}
-
-/* ── SECCIONES BASE ─────────────────────────────────── */
+/* ── SECTION COMMONS ────────────────────── */
 .section {
-  padding: clamp(80px, 12vw, 140px) clamp(24px, 8vw, 120px);
+  padding: clamp(80px, 12vw, 130px) clamp(24px, 8vw, 100px);
+  position: relative;
+  z-index: 1;
 }
 
 .section-label {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 5px;
-  color: var(--gold);
+  color: var(--cyan);
   text-transform: uppercase;
-  margin-bottom: 16px;
   display: block;
+  margin-bottom: 12px;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(42px, 8vw, 90px);
-  letter-spacing: 4px;
-  line-height: 1;
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  line-height: 1.05;
   color: var(--white);
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
-/* ── BIO ────────────────────────────────────────────── */
-.bio {
-  background: var(--ink);
-  border-top: 1px solid rgba(201,168,76,0.12);
+.section-divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(to right, var(--cyan), var(--orange));
+  margin-bottom: 48px;
 }
 
-.bio-inner {
-  max-width: 1200px;
+/* ── ABOUT SECTION ──────────────────────── */
+.about {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+
+.about-inner {
+  max-width: 1100px;
   margin: auto;
+}
+
+.about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: clamp(40px, 8vw, 100px);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 8vw, 80px);
   align-items: center;
+  margin-top: 8px;
 }
 
-.bio-left {
-  position: relative;
-}
-
-.bio-photo-frame {
-  position: relative;
-  display: inline-block;
-}
-
-.bio-photo-frame::before {
-  content: '';
-  position: absolute;
-  inset: -12px;
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 4px;
-  transform: rotate(2deg);
-  transition: transform 0.4s;
-}
-
-.bio-photo-frame:hover::before {
-  transform: rotate(0deg);
-}
-
-.bio-photo-frame img {
-  width: 100%;
-  max-width: 360px;
-  border-radius: 4px;
-  display: block;
-  filter: grayscale(30%) contrast(1.1);
-  transition: filter 0.4s;
-}
-
-.bio-photo-frame:hover img {
-  filter: grayscale(0%) contrast(1.05);
-}
-
-.bio-right p {
-  font-size: clamp(17px, 2.2vw, 21px);
+.about-text p {
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 400;
   line-height: 1.85;
-  color: rgba(250,247,242,0.75);
-  margin-bottom: 28px;
+  color: var(--muted);
+  margin-bottom: 20px;
 }
 
-.bio-right p em {
-  color: var(--gold);
-  font-style: italic;
+.about-text p em {
+  color: var(--cyan);
+  font-style: normal;
+  font-weight: 600;
 }
 
-.bio-stats {
-  display: flex;
-  gap: 40px;
-  margin-top: 44px;
-  padding-top: 36px;
-  border-top: 1px solid rgba(201,168,76,0.15);
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.stat-box {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.stat-box:hover {
+  border-color: var(--border2);
+  box-shadow: 0 8px 32px rgba(0,200,224,0.1);
 }
 
 .stat-num {
   font-family: var(--font-display);
-  font-size: 42px;
-  color: var(--gold);
-  line-height: 1;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--cyan);
   display: block;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(0,200,224,0.3);
 }
 
 .stat-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 3px;
-  color: rgba(250,247,242,0.4);
+  letter-spacing: 2px;
+  color: var(--muted);
   text-transform: uppercase;
   margin-top: 6px;
   display: block;
 }
 
-/* ── VIDEOS ─────────────────────────────────────────── */
+.about-visual {
+  position: relative;
+}
+
+.channel-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), box-shadow .4s, border-color .4s;
+}
+
+.channel-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--cyan-dim);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 40px var(--cyan-glow);
+}
+
+.channel-card-banner {
+  width: 100%; height: 120px;
+  overflow: hidden;
+}
+
+.channel-card-banner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: brightness(0.8);
+  transition: filter .4s, transform .4s;
+}
+
+.channel-card:hover .channel-card-banner img {
+  filter: brightness(1);
+  transform: scale(1.05);
+}
+
+.channel-card-body {
+  padding: 20px 24px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.channel-card-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan-dim);
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-top: -36px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 1;
+}
+
+.channel-card-info h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+
+.channel-card-info p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+.channel-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  background: rgba(0,200,224,0.08);
+  border: 1px solid rgba(0,200,224,0.2);
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* ── MEMBERS SECTION ────────────────────── */
+.members {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.members-inner {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.member-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), box-shadow .4s, border-color .4s;
+  cursor: default;
+}
+
+.member-card::before {
+  content: '';
+  position: absolute; top:0; left:0; right:0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+.member-card:hover::before { opacity: 1; }
+
+.member-card::after {
+  content: '';
+  position: absolute; inset:0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,200,224,0.05) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+.member-card:hover::after { opacity: 1; }
+
+.member-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--cyan-dim);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 30px var(--cyan-glow);
+}
+
+/* orange card (middle = Ukoback, or can vary) */
+.member-card.orange { --accent: var(--orange); --accent-glow: var(--orange-glow); --accent-dim: var(--orange-dim); }
+.member-card.orange::before { background: linear-gradient(to right, transparent, var(--orange), transparent); }
+.member-card.orange::after  { background: radial-gradient(ellipse at 50% 0%, rgba(224,120,32,0.07) 0%, transparent 65%); }
+.member-card.orange:hover   { border-color: var(--orange-dim); box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 30px var(--orange-glow); }
+.member-card.orange .member-avatar { border-color: var(--orange-dim); box-shadow: 0 0 20px var(--orange-glow); }
+.member-card.orange .member-name  { text-shadow: 0 0 20px rgba(224,120,32,0.3); }
+.member-card.orange .member-number { color: var(--orange); }
+
+.member-number {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.member-avatar {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan-dim);
+  object-fit: cover;
+  margin: 0 auto 20px;
+  display: block;
+  box-shadow: 0 0 20px var(--cyan-glow);
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), box-shadow .4s;
+  position: relative;
+  z-index: 1;
+}
+
+.member-card:hover .member-avatar {
+  transform: scale(1.08);
+}
+
+.member-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--white);
+  text-shadow: 0 0 20px rgba(0,200,224,0.3);
+  position: relative; z-index: 1;
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-top: 8px;
+  display: block;
+  position: relative; z-index: 1;
+}
+
+.member-card.orange .member-role { color: var(--orange); }
+
+.member-desc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+
+/* ── VIDEOS SECTION ─────────────────────── */
 .videos {
-  background: #060504;
-  border-top: 1px solid rgba(201,168,76,0.08);
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
 }
 
 .videos-inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -421,239 +712,295 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .video-card {
-  position: relative;
-  background: #0f0d0b;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(201,168,76,0.08);
-  transition: border-color 0.4s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), box-shadow .4s, border-color .4s;
 }
 
 .video-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(201,168,76,0.3);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.1);
+  transform: translateY(-8px);
+  border-color: var(--cyan-dim);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 30px var(--cyan-glow);
 }
 
 .video-card iframe {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border: none;
-  display: block;
+  width: 100%; aspect-ratio: 16/9;
+  border: none; display: block;
 }
 
 .video-meta {
-  padding: 14px 16px 16px;
+  padding: 12px 16px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.video-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--cyan);
+  animation: blink 2s infinite;
 }
 
 .video-meta span {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 2px;
-  color: var(--gold-dim);
+  color: var(--muted);
   text-transform: uppercase;
 }
 
-/* ── QUOTE ──────────────────────────────────────────── */
-.quote-section {
-  padding: clamp(80px, 12vw, 140px) clamp(24px, 8vw, 120px);
-  background: var(--ink);
-  border-top: 1px solid rgba(201,168,76,0.08);
-  text-align: center;
+/* ── FRIENDS SECTION ────────────────────── */
+.friends {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
 }
 
-.quote-mark {
-  font-family: var(--font-body);
-  font-size: 120px;
-  line-height: 0.5;
-  color: rgba(201,168,76,0.15);
-  margin-bottom: 20px;
-  display: block;
-}
-
-.quote-text {
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: clamp(22px, 4vw, 38px);
-  line-height: 1.5;
-  max-width: 800px;
-  margin: 0 auto 24px;
-  color: var(--cream);
-}
-
-.quote-author {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: var(--gold-dim);
-  text-transform: uppercase;
-}
-
-/* ── LINKS / REDES ──────────────────────────────────── */
-.links-section {
-  padding: clamp(80px, 12vw, 140px) clamp(24px, 8vw, 120px);
-  background: #060504;
-  border-top: 1px solid rgba(201,168,76,0.08);
-  text-align: center;
-}
-
-.links-inner {
-  max-width: 640px;
+.friends-inner {
+  max-width: 1100px;
   margin: auto;
 }
 
-.links-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 48px;
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
 }
 
-.link-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 4px;
+.friend-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
   text-decoration: none;
-  color: var(--white);
-  font-family: var(--font-mono);
-  font-size: 12px;
+  color: inherit;
+  display: block;
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), box-shadow .4s, border-color .4s;
+}
+
+.friend-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--orange-dim);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 30px var(--orange-glow);
+}
+
+.friend-card-body {
+  padding: 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.friend-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 2px solid var(--orange-dim);
+  object-fit: cover;
+  box-shadow: 0 0 20px var(--orange-glow);
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.friend-card:hover .friend-avatar {
+  transform: scale(1.1);
+}
+
+.friend-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
   letter-spacing: 3px;
+  color: var(--white);
+}
+
+.friend-handle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--orange);
+}
+
+.friend-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1px solid var(--orange-dim);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--orange);
   text-transform: uppercase;
-  background: transparent;
-  transition: background 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+  margin-top: 4px;
+  background: rgba(224,120,32,0.06);
+  transition: background .3s, border-color .3s, color .3s;
+}
+
+.friend-card:hover .friend-cta {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--bg);
+}
+
+/* ── SUBSCRIBE BANNER ───────────────────── */
+.subscribe-banner {
+  padding: clamp(70px,10vw,110px) clamp(24px,8vw,100px);
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  text-align: center;
   position: relative;
+  z-index: 1;
   overflow: hidden;
 }
 
-.link-btn::before {
+.subscribe-banner::before {
   content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 0;
-  background: var(--gold);
-  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: 0;
+  position: absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,200,224,0.06) 0%, transparent 65%);
+  pointer-events: none;
 }
 
-.link-btn:hover::before { width: 100%; }
-
-.link-btn:hover {
-  color: var(--ink);
-  border-color: var(--gold);
-  transform: translateX(4px);
+.subscribe-banner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px,5vw,52px);
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: var(--white);
+  margin-bottom: 16px;
 }
 
-.link-btn span, .link-btn svg {
-  position: relative;
-  z-index: 1;
+.subscribe-banner p {
+  font-size: clamp(15px,2vw,18px);
+  color: var(--muted);
+  margin-bottom: 36px;
+  font-weight: 400;
+  letter-spacing: 1px;
 }
 
-.link-icon {
-  width: 18px;
-  height: 18px;
-  opacity: 0.6;
-  transition: opacity 0.3s;
-}
-
-.link-btn:hover .link-icon { opacity: 1; }
-
-/* ── FOOTER ─────────────────────────────────────────── */
+/* ── FOOTER ─────────────────────────────── */
 footer {
-  padding: clamp(50px, 8vw, 80px) clamp(24px, 6vw, 80px);
-  background: #030302;
-  border-top: 1px solid rgba(201,168,76,0.1);
+  padding: clamp(40px,6vw,70px) clamp(24px,6vw,80px);
+  background: #050709;
+  border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   text-align: center;
 }
 
 .footer-logo {
   font-family: var(--font-display);
-  font-size: 36px;
-  letter-spacing: 10px;
-  color: rgba(201,168,76,0.3);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: rgba(0,200,224,0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo img {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.footer-sep {
+  width: 80px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--cyan-dim), transparent);
 }
 
 .footer-copy {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 3px;
-  color: rgba(250,247,242,0.2);
+  color: rgba(232,244,248,0.18);
   text-transform: uppercase;
 }
 
-.footer-line {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+.footer-members {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(0,200,224,0.3);
 }
 
-/* ── REVEAL ANIMATION ───────────────────────────────── */
+/* ── REVEAL ANIMATIONS ──────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  transform: translateY(40px);
+  transition: opacity .9s cubic-bezier(0.16,1,0.3,1), transform .9s cubic-bezier(0.16,1,0.3,1);
 }
+.reveal.visible { opacity:1; transform: none; }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* stagger children */
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1);
 }
+.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.12s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.24s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.36s; }
 
-.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0s; }
-.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.1s; }
-.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.2s; }
-.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.3s; }
-
-/* ── KEYFRAMES ──────────────────────────────────────── */
+/* ── KEYFRAMES ──────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity:0; transform:translateY(30px); }
+  to   { opacity:1; transform:none; }
 }
-
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from { opacity:0; }
+  to   { opacity:1; }
 }
-
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 20px var(--cyan-glow), inset 0 0 20px var(--cyan-glow); }
+  50%       { box-shadow: 0 0 50px rgba(0,200,224,0.3), inset 0 0 30px rgba(0,200,224,0.15); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50%       { opacity: 1;   transform: scaleY(1.2); }
+  0%, 100% { opacity:.3; transform: scaleY(1); }
+  50%       { opacity:1;  transform: scaleY(1.15); }
+}
+@keyframes blink {
+  0%, 100% { opacity:1; }
+  50%       { opacity:.3; }
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────── */
+/* ── RESPONSIVE ─────────────────────────── */
 @media (max-width: 900px) {
-  .bio-inner { grid-template-columns: 1fr; text-align: center; }
-  .bio-left { display: none; }
-  .bio-stats { justify-content: center; }
-  nav { padding: 20px 24px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { display: none; }
+  .members-grid { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+  nav { padding: 16px 24px; }
   .nav-links { gap: 20px; }
 }
-
 @media (max-width: 600px) {
   .nav-links { display: none; }
-  .hero-title { letter-spacing: 4px; }
-  .bio-stats { flex-direction: column; gap: 24px; }
+  .hero-title { letter-spacing: 3px; }
+  .hero-members-tag { flex-direction: column; gap: 8px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .video-grid { grid-template-columns: 1fr; }
+  .friends-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
-
 <body>
 
 <!-- CURSOR -->
@@ -661,39 +1008,54 @@ footer {
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">UKOBACK</a>
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">
+    <img src="https://yt3.googleusercontent.com/liy2rvSvUYqJQXSVzIHrYKqhFo5exqI2HICl9XLdc9UniVmSjBsh7OCAmSHZREt8CUHm2Dy-mw=s120-c-k-c0x00ffffff-no-rj" alt="Elders Papus">
+    ELDERS PAPUS
+  </a>
   <ul class="nav-links">
-    <li><a href="#bio">Sobre mí</a></li>
+    <li><a href="#sobre">Nosotros</a></li>
+    <li><a href="#integrantes">Integrantes</a></li>
     <li><a href="#videos">Videos</a></li>
-    <li><a href="#links">Redes</a></li>
+    <li><a href="#amigos">Amigos</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/-FeV22nsNhE?autoplay=1&mute=1&loop=1&playlist=-FeV22nsNhE&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-      loading="lazy"
-      title="Background video"
-    ></iframe>
+  <div class="hero-banner">
+    <img
+      src="https://yt3.googleusercontent.com/vngFPvjLhKZKHyhIekeItnqk7ji8RcEUvp610otQXIWpERXp2KvCJ4E5ehY0_jn_L6qVE-ARmWI=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj"
+      alt="Banner Elders Papus"
+      loading="eager"
+    >
   </div>
   <div class="hero-overlay"></div>
-  <div class="hero-vignette"></div>
+  <div class="hero-side-fade-l"></div>
+  <div class="hero-side-fade-r"></div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">Youtuber · Poeta · Chile</p>
-    <h1 class="hero-title">UKO<span>BACK</span></h1>
-    <p class="hero-sub">Creador de contenido — Poeta visual</p>
-    <div class="hero-profile">
+    <div class="hero-logo-ring">
       <img
-        src="https://i.postimg.cc/ZWXTPRL3/channels4-profile.jpg"
-        alt="Foto de perfil Ukoback"
-        loading="lazy"
+        src="https://yt3.googleusercontent.com/liy2rvSvUYqJQXSVzIHrYKqhFo5exqI2HICl9XLdc9UniVmSjBsh7OCAmSHZREt8CUHm2Dy-mw=s120-c-k-c0x00ffffff-no-rj"
+        alt="Logo Elders Papus"
       >
+    </div>
+    <p class="hero-badge">Canal Colaborativo · Gaming</p>
+    <h1 class="hero-title">ELDERS<br><span class="accent">PAPUS</span></h1>
+    <p class="hero-sub">Tres creadores. Un solo canal.</p>
+    <div class="hero-members-tag">
+      <span class="member-tag">RenMati</span>
+      <span class="member-tag-sep">×</span>
+      <span class="member-tag">Ukoback</span>
+      <span class="member-tag-sep">×</span>
+      <span class="member-tag">Keeper</span>
+    </div>
+    <div class="hero-cta">
+      <a href="https://www.youtube.com/channel/UCaW8pnica-0zsUg1OkZZJSg?sub_confirmation=1" target="_blank" rel="noopener" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.13 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.55a3.02 3.02 0 0 0 2.13-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+        <span>Suscribirse</span>
+      </a>
     </div>
   </div>
 
@@ -703,53 +1065,126 @@ footer {
   </div>
 </section>
 
-<!-- BANNER -->
-<div class="banner-wrap">
-  <img
-    src="https://yt3.googleusercontent.com/AlRcHDeqbIPWSMVGYcnoAG2bnFYSbpnK1ychvvvLlQebPBGjBG3CxNX-hqwXeS_AODNVbTcoSZw=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj"
-    alt="Banner de Ukoback"
-    loading="lazy"
-  >
-</div>
-
-<!-- BIO -->
-<section class="section bio" id="bio">
-  <div class="bio-inner">
-    <div class="bio-left reveal">
-      <div class="bio-photo-frame">
-        <img
-          src="https://i.postimg.cc/ZWXTPRL3/channels4-profile.jpg"
-          alt="Ukoback"
-          loading="lazy"
-        >
+<!-- SOBRE NOSOTROS -->
+<section class="section about" id="sobre">
+  <div class="about-inner">
+    <span class="section-label reveal">01 — Sobre nosotros</span>
+    <h2 class="section-title reveal">Quiénes somos</h2>
+    <div class="section-divider reveal"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="reveal">
+          <em>Elders Papus</em> es un canal colaborativo formado por tres creadores de contenido
+          que decidieron unir fuerzas para crear algo más grande. Aquí encontrarás gaming,
+          entretenimiento y mucho carisma en cada video.
+        </p>
+        <p class="reveal">
+          La energía de <em>RenMati</em>, la creatividad de <em>Ukoback</em> y el estilo de
+          <em>Keeper</em> se combinan para darte contenido fresco, divertido y con personalidad propia.
+        </p>
+        <div class="about-stats reveal-stagger">
+          <div class="stat-box">
+            <span class="stat-num">3</span>
+            <span class="stat-label">Creadores</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">1</span>
+            <span class="stat-label">Canal</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">∞</span>
+            <span class="stat-label">Contenido</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">CL</span>
+            <span class="stat-label">Origen</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <div class="channel-card">
+          <div class="channel-card-banner">
+            <img
+              src="https://yt3.googleusercontent.com/vngFPvjLhKZKHyhIekeItnqk7ji8RcEUvp610otQXIWpERXp2KvCJ4E5ehY0_jn_L6qVE-ARmWI=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj"
+              alt="Banner canal"
+            >
+          </div>
+          <div class="channel-card-body">
+            <img
+              class="channel-card-avatar"
+              src="https://yt3.googleusercontent.com/liy2rvSvUYqJQXSVzIHrYKqhFo5exqI2HICl9XLdc9UniVmSjBsh7OCAmSHZREt8CUHm2Dy-mw=s120-c-k-c0x00ffffff-no-rj"
+              alt="Elders Papus"
+            >
+            <div class="channel-card-info">
+              <h3>ELDERS PAPUS</h3>
+              <p>Canal colaborativo oficial</p>
+              <span class="channel-tag">Gaming · Entretenimiento</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="bio-right">
-      <span class="section-label reveal">Sobre mí</span>
-      <h2 class="section-title reveal">Mi espacio</h2>
-      <p class="reveal">
-        Soy <em>Ukoback</em>, creador de contenido, poeta y youtuber chileno.
-        Este sitio funciona como mi espacio digital donde puedes descubrir
-        mis videos y proyectos creativos.
-      </p>
-      <p class="reveal">
-        Hago contenido que mezcla <em>poesía, música y visuals</em>. Cada video
-        es una exploración nueva — sin límites de formato ni estilo.
-      </p>
-      <div class="bio-stats reveal-stagger">
-        <div>
-          <span class="stat-num">CL</span>
-          <span class="stat-label">Origen</span>
-        </div>
-        <div>
-          <span class="stat-num">YT</span>
-          <span class="stat-label">Plataforma</span>
-        </div>
-        <div>
-          <span class="stat-num">∞</span>
-          <span class="stat-label">Creatividad</span>
-        </div>
+  </div>
+</section>
+
+<!-- INTEGRANTES -->
+<section class="section members" id="integrantes">
+  <div class="members-inner">
+    <span class="section-label reveal">02 — El equipo</span>
+    <h2 class="section-title reveal">Integrantes</h2>
+    <div class="section-divider reveal"></div>
+    <div class="members-grid reveal-stagger">
+
+      <div class="member-card">
+        <span class="member-number">// 01</span>
+        <img
+          class="member-avatar"
+          src="https://yt3.googleusercontent.com/ytc/AIdro_kVuvdxQgkiMeq8RIekiHPQxmKa8k_87O6KKM_4-VZ08NwAAAA=s160-c-k-c0x00ffffff-no-rj"
+          alt="RenMati"
+          loading="lazy"
+          onerror="this.src='https://ui-avatars.com/api/?name=RM&background=0e1620&color=00c8e0&size=160'"
+        >
+        <div class="member-name">RENMATI</div>
+        <span class="member-role">Creador de Contenido</span>
+        <p class="member-desc">
+          Energía y humor en cada video. RenMati trae su estilo único y carisma
+          desbordante al canal, haciendo que cada sesión sea una experiencia diferente.
+        </p>
       </div>
+
+      <div class="member-card orange">
+        <span class="member-number">// 02</span>
+        <img
+          class="member-avatar"
+          src="https://yt3.googleusercontent.com/ytc/AIdro_lOsOsPM9eQz4P2fQpFf0jqhLPOr1WcqKjq5WJvog=s160-c-k-c0x00ffffff-no-rj"
+          alt="Ukoback"
+          loading="lazy"
+          onerror="this.src='https://ui-avatars.com/api/?name=UK&background=0e1620&color=e07820&size=160'"
+        >
+        <div class="member-name">UKOBACK</div>
+        <span class="member-role">Creador de Contenido</span>
+        <p class="member-desc">
+          Creatividad sin límites. Ukoback mezcla gaming con su visión artística para
+          crear contenido que va más allá del entretenimiento tradicional.
+        </p>
+      </div>
+
+      <div class="member-card">
+        <span class="member-number">// 03</span>
+        <img
+          class="member-avatar"
+          src="https://ui-avatars.com/api/?name=KP&background=0e1620&color=00c8e0&size=160"
+          alt="Keeper"
+          loading="lazy"
+        >
+        <div class="member-name">KEEPER</div>
+        <span class="member-role">Creador de Contenido</span>
+        <p class="member-desc">
+          El equilibrio del grupo. Keeper aporta su propio estilo y perspectiva,
+          complementando perfectamente al equipo con su manera de jugar y crear.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -757,8 +1192,9 @@ footer {
 <!-- VIDEOS -->
 <section class="section videos" id="videos">
   <div class="videos-inner">
-    <span class="section-label reveal">Contenido</span>
-    <h2 class="section-title reveal">Videos destacados</h2>
+    <span class="section-label reveal">03 — Contenido</span>
+    <h2 class="section-title reveal">Videos Destacados</h2>
+    <div class="section-divider reveal"></div>
     <div class="video-grid reveal-stagger">
 
       <div class="video-card">
@@ -767,10 +1203,11 @@ footer {
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-          title="Video Ukoback 1"
+          title="Video Elders Papus 1"
         ></iframe>
         <div class="video-meta">
-          <span>Video destacado</span>
+          <div class="video-dot"></div>
+          <span>Video Destacado</span>
         </div>
       </div>
 
@@ -780,10 +1217,23 @@ footer {
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-          title="Video Ukoback 2"
+          title="Video Elders Papus 2"
         ></iframe>
         <div class="video-meta">
-          <span>Video destacado</span>
+          <div class="video-dot"></div>
+          <span>Video Destacado</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <a href="https://www.youtube.com/channel/UCaW8pnica-0zsUg1OkZZJSg" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;background:var(--surface2);text-decoration:none;flex-direction:column;gap:12px;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="rgba(0,200,224,0.4)"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.13 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.55a3.02 3.02 0 0 0 2.13-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:rgba(0,200,224,0.5);text-transform:uppercase;">Ver más videos →</span>
+        </a>
+        <div class="video-meta">
+          <div class="video-dot" style="background:var(--orange);box-shadow:0 0 8px var(--orange);"></div>
+          <span>Canal oficial</span>
         </div>
       </div>
 
@@ -791,36 +1241,83 @@ footer {
   </div>
 </section>
 
-<!-- LINKS -->
-<section class="links-section" id="links">
-  <div class="links-inner">
-    <span class="section-label reveal">Redes</span>
-    <h2 class="section-title reveal">Encuéntrame</h2>
-    <div class="links-grid reveal-stagger">
+<!-- AMIGOS -->
+<section class="section friends" id="amigos">
+  <div class="friends-inner">
+    <span class="section-label reveal">04 — Comunidad</span>
+    <h2 class="section-title reveal">Canales Amigos</h2>
+    <div class="section-divider reveal"></div>
+    <div class="friends-grid reveal-stagger">
 
-      <a class="link-btn" href="https://www.youtube.com/@ukoback" target="_blank" rel="noopener">
-        <span>YouTube</span>
-        <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.13 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.55a3.02 3.02 0 0 0 2.13-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+      <a href="https://www.youtube.com/@renmatixd" target="_blank" rel="noopener" class="friend-card">
+        <div class="friend-card-body">
+          <img
+            class="friend-avatar"
+            src="https://yt3.googleusercontent.com/ytc/AIdro_kVuvdxQgkiMeq8RIekiHPQxmKa8k_87O6KKM_4-VZ08NwAAAA=s160-c-k-c0x00ffffff-no-rj"
+            alt="RenMati"
+            loading="lazy"
+            onerror="this.src='https://ui-avatars.com/api/?name=RM&background=0e1620&color=e07820&size=160'"
+          >
+          <div class="friend-name">RENMATI</div>
+          <div class="friend-handle">@renmatixd</div>
+          <div class="friend-cta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.13 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.55a3.02 3.02 0 0 0 2.13-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+            Ver canal
+          </div>
+        </div>
       </a>
 
-
+      <a href="https://www.youtube.com/@ukobacks" target="_blank" rel="noopener" class="friend-card">
+        <div class="friend-card-body">
+          <img
+            class="friend-avatar"
+            src="https://yt3.googleusercontent.com/ytc/AIdro_lOsOsPM9eQz4P2fQpFf0jqhLPOr1WcqKjq5WJvog=s160-c-k-c0x00ffffff-no-rj"
+            alt="Ukoback"
+            loading="lazy"
+            onerror="this.src='https://ui-avatars.com/api/?name=UK&background=0e1620&color=e07820&size=160'"
+          >
+          <div class="friend-name">UKOBACK</div>
+          <div class="friend-handle">@ukobacks</div>
+          <div class="friend-cta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.13 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.55a3.02 3.02 0 0 0 2.13-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+            Ver canal
+          </div>
+        </div>
+      </a>
 
     </div>
   </div>
 </section>
 
+<!-- SUSCRÍBETE -->
+<section class="subscribe-banner">
+  <span class="section-label reveal" style="justify-content:center;display:flex;">Únete</span>
+  <h2 class="reveal">¿Ya nos sigues?</h2>
+  <p class="reveal">Suscríbete al canal y activa la campana para no perderte nada.</p>
+  <div class="reveal">
+    <a href="https://www.youtube.com/channel/UCaW8pnica-0zsUg1OkZZJSg?sub_confirmation=1" target="_blank" rel="noopener" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.13-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.37.55A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.13 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.37-.55a3.02 3.02 0 0 0 2.13-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+      <span>Suscribirse ahora</span>
+    </a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-line"></div>
-  <div class="footer-logo">UKOBACK</div>
-  <p class="footer-copy">© 2025 Ukoback — Sitio oficial · Todos los derechos reservados</p>
-  <div class="footer-line"></div>
+  <div class="footer-logo">
+    <img src="https://yt3.googleusercontent.com/liy2rvSvUYqJQXSVzIHrYKqhFo5exqI2HICl9XLdc9UniVmSjBsh7OCAmSHZREt8CUHm2Dy-mw=s120-c-k-c0x00ffffff-no-rj" alt="">
+    ELDERS PAPUS
+  </div>
+  <div class="footer-sep"></div>
+  <p class="footer-members">RenMati · Ukoback · Keeper</p>
+  <p class="footer-copy">© 2025 Elders Papus — Canal Colaborativo · Todos los derechos reservados</p>
+  <div class="footer-sep"></div>
 </footer>
 
 <script>
-// ── CURSOR ─────────────────────────────────────────────
+// ── CURSOR ───────────────────────────────
 const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
+const ring   = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
 
 document.addEventListener('mousemove', e => {
@@ -837,47 +1334,28 @@ document.addEventListener('mousemove', e => {
   requestAnimationFrame(animateRing);
 })();
 
-document.querySelectorAll('a, button, img').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.width = '16px';
-    cursor.style.height = '16px';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.width = '10px';
-    cursor.style.height = '10px';
-  });
+document.querySelectorAll('a, button, .member-card, .friend-card, .video-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width = '14px'; cursor.style.height = '14px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width = '8px';  cursor.style.height = '8px'; });
 });
 
-// ── SCROLL REVEAL ──────────────────────────────────────
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      // unobserve after first reveal for performance
-      observer.unobserve(entry.target);
+// ── NAV SCROLL ───────────────────────────
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── REVEAL ON SCROLL ─────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
 document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
-
-// ── NAV SCROLL HIDE ────────────────────────────────────
-let lastY = 0;
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > 80) {
-    nav.style.background = 'rgba(10,8,6,0.95)';
-    nav.style.backdropFilter = 'blur(10px)';
-    nav.style.borderBottom = '1px solid rgba(201,168,76,0.08)';
-    nav.style.transition = 'background 0.4s, border-color 0.4s';
-  } else {
-    nav.style.background = '';
-    nav.style.backdropFilter = '';
-    nav.style.borderBottom = '';
-  }
-  lastY = y;
-}, { passive: true });
 </script>
 
 </body>
